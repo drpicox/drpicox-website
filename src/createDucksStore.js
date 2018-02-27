@@ -2,9 +2,10 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import ducksReducer from 'ducks-reducer'
 import ducksMiddleware from 'ducks-middleware'
 
+import * as routing from './routing'
 import * as wiki from './wiki'
 
-const ducks = { wiki }
+const ducks = { routing, wiki }
 const reducer = ducksReducer(ducks)
 const middleware = ducksMiddleware(ducks)
 

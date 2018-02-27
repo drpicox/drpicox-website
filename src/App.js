@@ -1,74 +1,35 @@
 import React, { Component } from 'react'
+import { Provider } from 'react-redux'
 
-import MinidownComponent from './minidown-component'
+import Readme from './components/Readme'
+import createDucksStore from './createDucksStore'
+import { Link, Route } from './routing'
+
+const store = createDucksStore()
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-          <a className="navbar-brand" href="/">
-            David Rodenas
-          </a>
-        </nav>
+      <Provider store={store}>
         <div>
-          <MinidownComponent
-            text={`
-Heading
-=======
-
-Sub-heading
------------
- 
-Paragraphs are separated
-by a blank line.
-
-Two spaces at the end of a line  
-produces a line break.
-
-Text attributes _emph_, 
-**strong**, \`code\`.
-
-Horizontal rule:
-
----
-
-Bullet list:
-
-  * apples
-  * oranges
-  * pears
-
-Numbered list:
-
-  1. wash
-  2. rinse
-  3. repeat
-
-Alternative headings:
-
-# First
-## Second
-### Third
-#### Fourth
-##### Fifth
-###### Sixth
-
-Fenced code:
-
-\`\`\`
-$ npm install ducks-reducer
-\`\`\`
-
-Fenced code with language:
-
-\`\`\`javascript
-expect(minidown('hello')).toEqual([['p', null, 'hello']])
-\`\`\`
-    `}
-          />
+          <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a className="navbar-brand" href="/">
+              David Rodenas
+            </a>
+          </nav>
+          <div>
+            <Link to="/la">
+              <button>La</button>
+            </Link>
+            <Link to="/lo">
+              <button>Lo</button>
+            </Link>
+            <Route path="/:la" component={({ la }) => `${la} ${la}`} />
+            <br />
+            <Readme />
+          </div>
         </div>
-      </div>
+      </Provider>
     )
   }
 }
