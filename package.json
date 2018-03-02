@@ -26,6 +26,7 @@
     "semi": false
   },
   "devDependencies": {
-    "jest-fetch-mock": "^1.4.1"
+    "jest-fetch-mock": "^1.4.1",
+    "spy-middleware": "^1.0.1"
   }
 }
