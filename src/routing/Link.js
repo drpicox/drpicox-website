@@ -3,13 +3,16 @@ import { connect } from 'react-redux'
 import { routingPush } from '.'
 
 const LinkPresentation = ({ children, onClick }) => (
-  <div href={''} onClick={onClick}>
+  <a href="" onClick={onClick}>
     {children}
-  </div>
+  </a>
 )
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onClick: () => dispatch(routingPush(ownProps.to)),
+  onClick: event => {
+    event.preventDefault()
+    dispatch(routingPush(ownProps.to))
+  },
 })
 
 const Link = connect(undefined, mapDispatchToProps)(LinkPresentation)

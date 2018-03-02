@@ -4,8 +4,9 @@ import ducksMiddleware from 'ducks-middleware'
 
 import * as routing from './routing'
 import * as wiki from './wiki'
+import * as wikiRouting from './wikiRouting'
 
-const ducks = { routing, wiki }
+const ducks = { routing, wiki, wikiRouting }
 const reducer = ducksReducer(ducks)
 const middleware = ducksMiddleware(ducks)
 

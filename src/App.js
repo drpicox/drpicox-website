@@ -24,7 +24,10 @@ class App extends Component {
             <Link to="/lo">
               <button>Lo</button>
             </Link>
-            <Route path="/:la" component={({ la }) => `${la} ${la}`} />
+            <Link to="/w/SomePage">
+              <button>SomePage</button>
+            </Link>
+            <Route path="/:la" component={({ la }) => `xx ${la} ${la} xx`} />
             <br />
             <Readme />
           </div>
