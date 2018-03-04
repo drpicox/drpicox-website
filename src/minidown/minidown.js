@@ -5,7 +5,7 @@ import parseTree from './lib/parseTree'
 const rules = [
   [
     /```(.*?)\n((.|\n)+?)\n```/,
-    ($0, $1, $2) => ['pre', { minidown: 'false', lang: $1 }, $2],
+    ($0, $1, $2) => ['pre', { minidown: 'false', lang: $1 || undefined }, $2],
   ],
   [/\s*---+\s*/, () => ['hr', null]],
   [/\s*(\n|$)/, () => ['br', null]],

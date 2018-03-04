@@ -4,7 +4,7 @@ describe('minidown', () => {
   it('fenced code is placed inside [pre]', () => {
     const tree = minidown('```\nlet i = 0;\n```')
 
-    expect(tree).toEqual([['pre', null, 'let i = 0;']])
+    expect(tree).toEqual([['pre', { minidown: 'false' }, 'let i = 0;']])
   })
 
   it('ordinary text is placed inside [p]', () => {
@@ -48,7 +48,9 @@ describe('minidown', () => {
   it('decorates `code` with [code]', () => {
     const tree = minidown('increment `count`')
 
-    expect(tree).toEqual([['p', null, 'increment ', ['code', null, 'count']]])
+    expect(tree).toEqual([
+      ['p', null, 'increment ', ['code', { minidown: 'false' }, 'count']],
+    ])
   })
 
   it('decorates nested', () => {
@@ -58,7 +60,11 @@ describe('minidown', () => {
       [
         'ul',
         null,
-        ['li', null, ['em', null, 'increment ', ['code', null, 'count']]],
+        [
+          'li',
+          null,
+          ['em', null, 'increment ', ['code', { minidown: 'false' }, 'count']],
+        ],
       ],
     ])
   })
@@ -66,13 +72,15 @@ describe('minidown', () => {
   it('do not decorates inside [code]', () => {
     const tree = minidown('`let i = _global_`')
 
-    expect(tree).toEqual([['p', null, ['code', null, 'let i = _global_']]])
+    expect(tree).toEqual([
+      ['p', null, ['code', { minidown: 'false' }, 'let i = _global_']],
+    ])
   })
 
   it('do not decorates inside [pre]', () => {
     const tree = minidown('```\nlet i = `awesome`\n```')
 
-    expect(tree).toEqual([['pre', null, 'let i = `awesome`']])
+    expect(tree).toEqual([['pre', { minidown: 'false' }, 'let i = `awesome`']])
   })
 
   it('should parse a reasonable markdown', () => {
@@ -151,7 +159,7 @@ expect(minidown('hello')).toEqual([['p', null, 'hello']])
         ', \n',
         ['strong', null, 'strong'],
         ', ',
-        ['code', null, 'code'],
+        ['code', { minidown: 'false' }, 'code'],
         '.',
       ],
       ['p', null, 'Horizontal rule:'],
@@ -180,11 +188,11 @@ expect(minidown('hello')).toEqual([['p', null, 'hello']])
       ['h5', null, 'Fifth'],
       ['h6', null, 'Sixth'],
       ['p', null, 'Fenced code:'],
-      ['pre', null, '$ npm install ducks-reducer'],
+      ['pre', { minidown: 'false' }, '$ npm install ducks-reducer'],
       ['p', null, 'Fenced code with language:'],
       [
         'pre',
-        {lang: 'javascript'},
+        { lang: 'javascript', minidown: 'false' },
         "expect(minidown('hello')).toEqual([['p', null, 'hello']])",
       ],
     ])
