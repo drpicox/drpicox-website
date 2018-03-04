@@ -1,12 +1,11 @@
-import React from 'react'
-import MinidownComponent from '../minidown-component'
-
-const Readme = () => {
-  return (
-    <MinidownComponent
-      text={`
-Heading
+WikiPage
 =======
+
+Links
+-----
+
+This is Home and  
+This is a WikiPage of AnyKind
 
 Sub-heading
 -----------
@@ -18,7 +17,7 @@ Two spaces at the end of a line
 produces a line break.
 
 Text attributes _emph_, 
-**strong**, \`code\`.
+**strong**, `code`.
 
 Horizontal rule:
 
@@ -47,18 +46,12 @@ Alternative headings:
 
 Fenced code:
 
-\`\`\`
+```
 $ npm install ducks-reducer
-\`\`\`
+```
 
 Fenced code with language:
 
-\`\`\`javascript
+```javascript
 expect(minidown('hello')).toEqual([['p', null, 'hello']])
-\`\`\`
-    `}
-    />
-  )
-}
-
-export default Readme
+```

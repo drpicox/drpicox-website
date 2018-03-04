@@ -22,13 +22,13 @@ describe('wikiRouting', () => {
     expect(url).toBeDefined()
   })
 
-  it('should issue a fetchTopic for README when "/" url', async () => {
+  it('should issue a fetchTopic for Home when "/" url', async () => {
     store.dispatch(routingChanged('/'))
 
     const fetchTopicAction = await spyMiddleware.until(FETCH_TOPIC)
 
     expect(fetchTopicAction).toMatchObject({
-      name: 'README',
+      name: 'Home',
     })
   })
 

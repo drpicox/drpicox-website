@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 
-import Readme from './components/Readme'
+import Header from './components/Header'
+import WikiPage from './components/WikiPage'
 import createDucksStore from './createDucksStore'
 import { Link, Route } from './routing'
 
@@ -12,11 +13,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div>
-          <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a className="navbar-brand" href="/">
-              David Rodenas
-            </a>
-          </nav>
+          <Header />
           <div>
             <Link to="/la">
               <button>La</button>
@@ -27,9 +24,8 @@ class App extends Component {
             <Link to="/w/SomePage">
               <button>SomePage</button>
             </Link>
-            <Route path="/:la" component={({ la }) => `xx ${la} ${la} xx`} />
-            <br />
-            <Readme />
+            <Route path="/" component={WikiPage} />
+            <Route path="/w/:name" component={WikiPage} />
           </div>
         </div>
       </Provider>

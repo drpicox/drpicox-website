@@ -1,7 +1,7 @@
 import parseText from './parseText'
 
-const parseTree = ([e, p, ...lines], rules, excludedEntities = []) => {
-  if (excludedEntities.includes(e)) return [e, p, ...lines]
+const parseTree = ([e, p, ...lines], rules) => {
+  if (p && p.minidown === 'false') return [e, p, ...lines]
 
   const result = [e, p]
 
@@ -16,7 +16,7 @@ const parseTree = ([e, p, ...lines], rules, excludedEntities = []) => {
 
   trees.forEach(tree => {
     if (Array.isArray(tree)) {
-      result.push(parseTree(tree, rules, excludedEntities))
+      result.push(parseTree(tree, rules))
     } else {
       result.push(tree)
     }

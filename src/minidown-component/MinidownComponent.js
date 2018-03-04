@@ -16,14 +16,15 @@ function createElements(ast) {
 }
 
 export default class MinidownComponent extends Component {
+  rendered = null
+
   render() {
-    let { text, render } = this
-    if (text !== this.props.text) {
-      text = this.props.text
-      let ast = minidown(text)
-      render = React.createElement('div', null, ...createElements(ast))
+    if (this.text !== this.props.text && this.props.text) {
+      this.text = this.props.text
+      let ast = minidown(this.text)
+      this.rendered = React.createElement('div', null, ...createElements(ast))
     }
 
-    return render
+    return this.rendered
   }
 }

@@ -5,7 +5,7 @@ import parseTree from './lib/parseTree'
 const rules = [
   [
     /```(.*?)\n((.|\n)+?)\n```/,
-    ($0, $1, $2) => ['pre', $1 ? {lang: $1} : null, $2],
+    ($0, $1, $2) => ['pre', { minidown: 'false', lang: $1 }, $2],
   ],
   [/\s*---+\s*/, () => ['hr', null]],
   [/\s*(\n|$)/, () => ['br', null]],
@@ -26,15 +26,17 @@ const mergers = [
 const decorators = [
   [/_(.+?)_/, ($0, $1) => ['em', null, $1]],
   [/(\*\*)(.+?)\1/, ($0, $1, $2) => ['strong', null, $2]],
-  [/`(.+?)`/, ($0, $1) => ['code', null, $1]],
+  [
+    /Home|([A-Z][a-z]+){2,}/,
+    $0 => ['a', { href: `/w/${$0}`, minidown: 'false' }, $0],
+  ],
+  [/`(.+?)`/, ($0, $1) => ['code', { minidown: 'false' }, $1]],
   [/ {2}(\n|$)/, () => ['br', null]],
 ]
-
-const excludedEntities = ['code', 'pre']
 
 const minidown = text =>
   mergeTrees(parseText(text, rules), mergers)
     .filter(([e]) => e !== 'br')
-    .map(tree => parseTree(tree, decorators, excludedEntities))
+    .map(tree => parseTree(tree, decorators))
 
 export default minidown

@@ -4,7 +4,7 @@ import { fetchTopic } from '../wiki'
 const wikiRoutingMiddleware = ({ dispatch, getState }) => {
   const fetchTopicForUrl = url => {
     if (url === '/') {
-      dispatch(fetchTopic('README'))
+      dispatch(fetchTopic('Home'))
     }
     const matchPage = url.match(/^\/w\/(\w+)$/)
     if (matchPage) {
